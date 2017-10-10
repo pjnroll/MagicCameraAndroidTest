@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/pier/Scaricati/MagicCamera-master/Project-AndroidStudio/magicfilter/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="022660abb77d1e466a86dedd389de1b004d1c041">
+        <dex dex="/home/pier/Scaricati/MagicCamera-master/Project-AndroidStudio/app/build/intermediates/pre-dexed/debug/classes_00afd56142d098e14b07052bca5178b375c01464.jar" />
+    </item>
+
+</items>
