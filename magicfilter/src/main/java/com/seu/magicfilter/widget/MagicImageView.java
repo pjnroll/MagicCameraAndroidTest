@@ -80,26 +80,26 @@ public class MagicImageView extends MagicBaseView{
             Log.e("MagicSDK", "please storeBitmap first!!");
             return;
         }
-        MagicJni.jniInitMagicBeautify(_bitmapHandler);
+        MagicJni.callJniInitMagicBeautify(_bitmapHandler);
     }
 
     public void setBitmap(Bitmap bitmap){
         if(_bitmapHandler != null)
             freeBitmap();
-        _bitmapHandler = MagicJni.jniStoreBitmapData(bitmap);
+        _bitmapHandler = MagicJni.callJniStoreBitmapData(bitmap);
         originBitmap = bitmap;
     }
 
     public void freeBitmap(){
         if(_bitmapHandler == null)
             return;
-        MagicJni.jniFreeBitmapData(_bitmapHandler);
+        MagicJni.callJniFreeBitmapData(_bitmapHandler);
         _bitmapHandler = null;
     }
 
     public Bitmap getBitmap(){
         if(_bitmapHandler == null)
             return null;
-        return MagicJni.jniGetBitmapFromStoredBitmapData(_bitmapHandler);
+        return MagicJni.callJniGetBitmapFromStoredBitmapData(_bitmapHandler);
     }
 }

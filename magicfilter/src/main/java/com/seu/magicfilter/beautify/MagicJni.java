@@ -13,13 +13,45 @@ public class MagicJni {
         System.loadLibrary("MagicBeautify");
     }
 
-    public static native void jniInitMagicBeautify(ByteBuffer handler);
-    public static native void jniUnInitMagicBeautify();
+    private static native void jniInitMagicBeautify(ByteBuffer handler);
+    public static void callJniInitMagicBeautify(ByteBuffer handler) {
+        jniInitMagicBeautify(handler);
+    };
 
-    public static native void jniStartSkinSmooth(float denoiseLevel);
-    public static native void jniStartWhiteSkin(float whitenLevel);
+    private static native void jniUnInitMagicBeautify();
+    public static void callJniUnInitMagicBeautify() {
+        jniUnInitMagicBeautify();
+    };
 
-    public static native ByteBuffer jniStoreBitmapData(Bitmap bitmap);
-    public static native void jniFreeBitmapData(ByteBuffer handler);
-    public static native Bitmap jniGetBitmapFromStoredBitmapData(ByteBuffer handler);
+
+    private static native void jniStartSkinSmooth(float denoiseLevel);
+    public static void callJniStartSkinSmooth(float denoiseLevel) {
+        jniStartSkinSmooth(denoiseLevel);
+    };
+
+
+    private static native void jniStartWhiteSkin(float whitenLevel);
+    public static void callJniStartWhiteSkin(float whitenLevel) {
+        jniStartWhiteSkin(whitenLevel);
+    };
+
+
+
+    private static native ByteBuffer jniStoreBitmapData(Bitmap bitmap);
+    public static ByteBuffer callJniStoreBitmapData(Bitmap bitmap) {
+        return jniStoreBitmapData(bitmap);
+    };
+
+
+    private static native void jniFreeBitmapData(ByteBuffer handler);
+    public static void callJniFreeBitmapData(ByteBuffer handler) {
+        jniFreeBitmapData(handler);
+    };
+
+
+    private static native Bitmap jniGetBitmapFromStoredBitmapData(ByteBuffer handler);
+    public static Bitmap callJniGetBitmapFromStoredBitmapData(ByteBuffer handler) {
+        return jniGetBitmapFromStoredBitmapData(handler);
+    };
+
 }
