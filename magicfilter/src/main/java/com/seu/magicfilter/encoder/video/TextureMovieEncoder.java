@@ -29,6 +29,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.seu.magicfilter.camera.utils.CameraInfo;
+import com.seu.magicfilter.exceptions.TextureMovieEncoderException;
 import com.seu.magicfilter.filter.base.MagicCameraInputFilter;
 import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 import com.seu.magicfilter.filter.helper.MagicFilterFactory;
@@ -306,7 +307,7 @@ public class TextureMovieEncoder implements Runnable {
                     Looper.myLooper().quit();
                     break;
                 default:
-                    throw new RuntimeException("Unhandled msg what=" + what);
+                    throw new TextureMovieEncoderException("Unhandled msg what=" + what);
             }
         }
     }
@@ -396,7 +397,7 @@ public class TextureMovieEncoder implements Runnable {
         try {
             mVideoEncoder = new VideoEncoderCore(width, height, bitRate, outputFile);
         } catch (IOException ioe) {
-            throw new RuntimeException(ioe);
+            throw new TextureMovieEncoderException(ioe.getMessage());
         }
         mVideoWidth = width;
         mVideoHeight = height;

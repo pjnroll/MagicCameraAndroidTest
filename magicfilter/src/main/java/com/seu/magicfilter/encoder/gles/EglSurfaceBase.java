@@ -22,6 +22,7 @@ import android.opengl.EGLSurface;
 import android.opengl.GLES20;
 import android.util.Log;
 
+import com.seu.magicfilter.exceptions.EglSurfaceBaseException;
 import com.seu.magicfilter.utils.OpenGlUtils;
 
 import java.io.BufferedOutputStream;
@@ -159,7 +160,7 @@ public class EglSurfaceBase {
      */
     public void saveFrame(File file) throws IOException {
         if (!mEglCore.isCurrent(mEGLSurface)) {
-            throw new RuntimeException("Expected EGL context/surface is not current");
+            throw new EglSurfaceBaseException("Expected EGL context/surface is not current");
         }
 
         // glReadPixels fills in a "direct" ByteBuffer with what is essentially big-endian RGBA

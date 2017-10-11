@@ -21,6 +21,7 @@ import android.view.Surface;
 
 import com.seu.magicfilter.encoder.gles.EglCore;
 import com.seu.magicfilter.encoder.gles.EglSurfaceBase;
+import com.seu.magicfilter.exceptions.WindowSurfaceException;
 
 /**
  * Recordable EGL window surface.
@@ -85,7 +86,7 @@ public class WindowSurface extends EglSurfaceBase {
      */
     public void recreate(EglCore newEglCore) {
         if (mSurface == null) {
-            throw new RuntimeException("not yet implemented for SurfaceTexture");
+            throw new WindowSurfaceException("not yet implemented for SurfaceTexture");
         }
         mEglCore = newEglCore;          // switch to new context
         createWindowSurface(mSurface);  // create new surface

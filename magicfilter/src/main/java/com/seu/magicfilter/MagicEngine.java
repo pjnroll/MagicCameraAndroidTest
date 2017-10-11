@@ -1,8 +1,7 @@
 package com.seu.magicfilter;
 
-import android.content.Context;
-
 import com.seu.magicfilter.camera.CameraEngine;
+import com.seu.magicfilter.exceptions.MagicEngineError;
 import com.seu.magicfilter.filter.helper.MagicFilterType;
 import com.seu.magicfilter.utils.MagicParams;
 import com.seu.magicfilter.helper.SavePictureTask;
@@ -19,7 +18,7 @@ public class MagicEngine {
 
     public static MagicEngine getInstance(){
         if(magicEngine == null)
-            throw new NullPointerException("MagicEngine must be built first");
+            throw new MagicEngineError();
         else
             return magicEngine;
     }

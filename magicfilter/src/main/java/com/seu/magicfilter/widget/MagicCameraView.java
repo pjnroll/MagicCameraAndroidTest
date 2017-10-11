@@ -13,6 +13,7 @@ import android.view.SurfaceHolder;
 import com.seu.magicfilter.camera.CameraEngine;
 import com.seu.magicfilter.camera.utils.CameraInfo;
 import com.seu.magicfilter.encoder.video.TextureMovieEncoder;
+import com.seu.magicfilter.exceptions.MagicCameraViewException;
 import com.seu.magicfilter.filter.advanced.MagicBeautyFilter;
 import com.seu.magicfilter.filter.base.MagicCameraInputFilter;
 import com.seu.magicfilter.filter.helper.MagicFilterType;
@@ -117,7 +118,7 @@ public class MagicCameraView extends MagicBaseView {
                 case RECORDING_ON:
                     break;
                 default:
-                    throw new RuntimeException("unknown status " + recordingStatus);
+                    throw new MagicCameraViewException("unknown status " + recordingStatus);
             }
         } else {
             switch (recordingStatus) {
@@ -129,7 +130,7 @@ public class MagicCameraView extends MagicBaseView {
                 case RECORDING_OFF:
                     break;
                 default:
-                    throw new RuntimeException("unknown status " + recordingStatus);
+                    throw new MagicCameraViewException("unknown status " + recordingStatus);
             }
         }
         float[] mtx = new float[16];

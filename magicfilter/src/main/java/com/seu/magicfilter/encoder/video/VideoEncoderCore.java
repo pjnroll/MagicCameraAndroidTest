@@ -23,6 +23,8 @@ import android.media.MediaMuxer;
 import android.util.Log;
 import android.view.Surface;
 
+import com.seu.magicfilter.exceptions.VideoEncoderCoreException;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -153,7 +155,7 @@ public class VideoEncoderCore {
             } else if (encoderStatus == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
                 // should happen before receiving buffers, and should only happen once
                 if (mMuxerStarted) {
-                    throw new RuntimeException("format changed twice");
+                    throw new VideoEncoderCoreException("format changed twice");
                 }
                 MediaFormat newFormat = mEncoder.getOutputFormat();
                 Log.d(TAG, "encoder output format changed: " + newFormat);
@@ -169,7 +171,7 @@ public class VideoEncoderCore {
             } else {
                 ByteBuffer encodedData = encoderOutputBuffers[encoderStatus];
                 if (encodedData == null) {
-                    throw new RuntimeException("encoderOutputBuffer " + encoderStatus +
+                    throw new VideoEncoderCoreException("encoderOutputBuffer " + encoderStatus +
                             " was null");
                 }
 
@@ -182,7 +184,7 @@ public class VideoEncoderCore {
 
                 if (mBufferInfo.size != 0) {
                     if (!mMuxerStarted) {
-                        throw new RuntimeException("muxer hasn't started");
+                        throw new VideoEncoderCoreException("muxer hasn't started");
                     }
 
                     // adjust the ByteBuffer values to match BufferInfo (not needed?)

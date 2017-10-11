@@ -22,6 +22,7 @@ import android.opengl.GLUtils;
 import android.util.Log;
 
 import com.seu.magicfilter.MagicEngine;
+import com.seu.magicfilter.exceptions.OpenGlUtilsException;
 import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 
 public class OpenGlUtils {
@@ -138,7 +139,7 @@ public class OpenGlUtils {
 		}
 		
 		if (textureHandle[0] == 0){
-			throw new RuntimeException("Error loading texture.");
+			throw new OpenGlUtilsException("Error loading texture.");
 		}
 		
 		return textureHandle[0];
@@ -299,7 +300,7 @@ public class OpenGlUtils {
 		if (error != GLES20.GL_NO_ERROR) {
 			String msg = op + ": glError 0x" + Integer.toHexString(error);
 			Log.e("OpenGlUtils", msg);
-			throw new RuntimeException(msg);
+			throw new OpenGlUtilsException(msg);
 		}
 	}
 }

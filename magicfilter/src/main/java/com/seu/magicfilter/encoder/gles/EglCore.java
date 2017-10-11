@@ -26,6 +26,8 @@ import android.opengl.EGLSurface;
 import android.util.Log;
 import android.view.Surface;
 
+import com.seu.magicfilter.exceptions.EglCoreException;
+
 /**
  * Core EGL state (display, context, config).
  * <p>
@@ -73,7 +75,7 @@ public final class EglCore {
      */
     public EglCore(EGLContext sharedContext, int flags) {
         if (mEGLDisplay != EGL14.EGL_NO_DISPLAY) {
-            throw new RuntimeException("EGL already set up");
+            throw new EglCoreException("EGL already set up");
         }
 
         if (sharedContext == null) {
@@ -82,12 +84,12 @@ public final class EglCore {
 
         mEGLDisplay = EGL14.eglGetDisplay(EGL14.EGL_DEFAULT_DISPLAY);
         if (mEGLDisplay == EGL14.EGL_NO_DISPLAY) {
-            throw new RuntimeException("unable to get EGL14 display");
+            throw new EglCoreException("unable to get EGL14 display");
         }
         int[] version = new int[2];
         if (!EGL14.eglInitialize(mEGLDisplay, version, 0, version, 1)) {
             mEGLDisplay = null;
-            throw new RuntimeException("unable to initialize EGL14");
+            throw new EglCoreException("unable to initialize EGL14");
         }
 
         // Try to get a GLES3 context, if requested.
@@ -114,7 +116,7 @@ public final class EglCore {
             //Log.d(TAG, "Trying GLES 2");
             EGLConfig config = getConfig(flags, 2);
             if (config == null) {
-                throw new RuntimeException("Unable to find a suitable EGLConfig");
+                throw new EglCoreException("Unable to find a suitable EGLConfig");
             }
             int[] attrib2_list = {
                     EGL14.EGL_CONTEXT_CLIENT_VERSION, 2,
@@ -228,7 +230,7 @@ public final class EglCore {
      */
     public EGLSurface createWindowSurface(Object surface) {
         if (!(surface instanceof Surface) && !(surface instanceof SurfaceTexture)) {
-            throw new RuntimeException("invalid surface: " + surface);
+            throw new EglCoreException("invalid surface: " + surface);
         }
 
         // Create a window surface, and attach it to the Surface we received.
@@ -239,7 +241,7 @@ public final class EglCore {
                 surfaceAttribs, 0);
         checkEglError("eglCreateWindowSurface");
         if (eglSurface == null) {
-            throw new RuntimeException("surface was null");
+            throw new EglCoreException("surface was null");
         }
         return eglSurface;
     }
@@ -257,7 +259,7 @@ public final class EglCore {
                 surfaceAttribs, 0);
         checkEglError("eglCreatePbufferSurface");
         if (eglSurface == null) {
-            throw new RuntimeException("surface was null");
+            throw new EglCoreException("surface was null");
         }
         return eglSurface;
     }
@@ -271,7 +273,7 @@ public final class EglCore {
             Log.d(TAG, "NOTE: makeCurrent w/o display");
         }
         if (!EGL14.eglMakeCurrent(mEGLDisplay, eglSurface, eglSurface, mEGLContext)) {
-            throw new RuntimeException("eglMakeCurrent failed");
+            throw new EglCoreException("eglMakeCurrent failed");
         }
     }
 
@@ -284,7 +286,7 @@ public final class EglCore {
             Log.d(TAG, "NOTE: makeCurrent w/o display");
         }
         if (!EGL14.eglMakeCurrent(mEGLDisplay, drawSurface, readSurface, mEGLContext)) {
-            throw new RuntimeException("eglMakeCurrent(draw,read) failed");
+            throw new EglCoreException("eglMakeCurrent(draw,read) failed");
         }
     }
 
@@ -294,7 +296,7 @@ public final class EglCore {
     public void makeNothingCurrent() {
         if (!EGL14.eglMakeCurrent(mEGLDisplay, EGL14.EGL_NO_SURFACE, EGL14.EGL_NO_SURFACE,
                 EGL14.EGL_NO_CONTEXT)) {
-            throw new RuntimeException("eglMakeCurrent failed");
+            throw new EglCoreException("eglMakeCurrent failed");
         }
     }
 
@@ -366,7 +368,7 @@ public final class EglCore {
     private void checkEglError(String msg) {
         int error;
         if ((error = EGL14.eglGetError()) != EGL14.EGL_SUCCESS) {
-            throw new RuntimeException(msg + ": EGL error: 0x" + Integer.toHexString(error));
+            throw new EglCoreException(msg + ": EGL error: 0x" + Integer.toHexString(error));
         }
     }
 }
