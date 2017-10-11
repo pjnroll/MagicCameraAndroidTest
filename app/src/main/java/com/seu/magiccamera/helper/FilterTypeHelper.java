@@ -2,247 +2,166 @@ package com.seu.magiccamera.helper;
 
 import com.seu.magiccamera.R;
 import com.seu.magicfilter.filter.helper.MagicFilterType;
+import  java.util.*;
 
 
+/**
+ * FilterTypeHelper Class, to manage the filters
+ */
 public class FilterTypeHelper {
-	
+
 	public static int FilterType2Color(MagicFilterType filterType){
-		switch (filterType) {
-			case NONE:
-				return R.color.filter_color_grey_light;
-			case WHITECAT:
-			case BLACKCAT:
-			case SUNRISE:
-			case SUNSET:
-				return R.color.filter_color_brown_light;
-			case COOL:
-				return R.color.filter_color_blue_dark;
-			case EMERALD:
-			case EVERGREEN:
-				return R.color.filter_color_blue_dark_dark;
-			case FAIRYTALE:
-				return R.color.filter_color_blue;
-			case ROMANCE:
-			case SAKURA:
-			case WARM:
-				return R.color.filter_color_pink;
-			case AMARO:
-			case BRANNAN:
-			case BROOKLYN:
-			case EARLYBIRD:
-			case FREUD:
-			case HEFE:
-			case HUDSON:
-			case INKWELL:
-			case KEVIN:
-			case LOMO:
-			case N1977:
-			case NASHVILLE:
-			case PIXAR:
-			case RISE:
-			case SIERRA:
-			case SUTRO:
-			case TOASTER2:
-			case VALENCIA:
-			case WALDEN:
-			case XPROII:
-				return R.color.filter_color_brown_dark;
-			case ANTIQUE:
-			case NOSTALGIA:
-				return R.color.filter_color_green_dark;
-			case SKINWHITEN:
-			case HEALTHY:
-				return R.color.filter_color_red;
-			case SWEETS:
-				return R.color.filter_color_red_dark;
-			case CALM:
-			case LATTE:
-			case TENDER:
-				return R.color.filter_color_brown;
-			default:
-				return R.color.filter_color_grey_light;
+		HashMap<MagicFilterType, Integer> filterTypeMap = new HashMap<>();
+		filterTypeMap.put(MagicFilterType.NONE, R.color.filter_color_grey_light);
+		filterTypeMap.put(MagicFilterType.WHITECAT, R.color.filter_color_brown_light);
+		filterTypeMap.put(MagicFilterType.BLACKCAT, R.color.filter_color_brown_light);
+		filterTypeMap.put(MagicFilterType.SUNRISE, R.color.filter_color_brown_light);
+		filterTypeMap.put(MagicFilterType.SUNSET, R.color.filter_color_brown_light);
+		filterTypeMap.put(MagicFilterType.COOL, R.color.filter_color_blue_dark);
+		filterTypeMap.put(MagicFilterType.EMERALD, R.color.filter_color_blue_dark_dark);
+		filterTypeMap.put(MagicFilterType.EVERGREEN, R.color.filter_color_blue_dark_dark);
+		filterTypeMap.put(MagicFilterType.FAIRYTALE, R.color.filter_color_blue);
+		filterTypeMap.put(MagicFilterType.ROMANCE, R.color.filter_color_pink);
+		filterTypeMap.put(MagicFilterType.SAKURA, R.color.filter_color_pink);
+		filterTypeMap.put(MagicFilterType.WARM, R.color.filter_color_pink);
+		filterTypeMap.put(MagicFilterType.AMARO, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.BRANNAN, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.BROOKLYN, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.EARLYBIRD, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.FREUD, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.HEFE, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.HUDSON, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.INKWELL, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.KEVIN, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.LOMO, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.N1977, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.NASHVILLE, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.PIXAR, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.RISE, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.SIERRA, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.SUTRO, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.TOASTER2, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.VALENCIA, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.WALDEN, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.XPROII, R.color.filter_color_brown_dark);
+		filterTypeMap.put(MagicFilterType.ANTIQUE, R.color.filter_color_green_dark);
+		filterTypeMap.put(MagicFilterType.NOSTALGIA, R.color.filter_color_green_dark);
+		filterTypeMap.put(MagicFilterType.SKINWHITEN, R.color.filter_color_red);
+		filterTypeMap.put(MagicFilterType.HEALTHY, R.color.filter_color_red);
+		filterTypeMap.put(MagicFilterType.SWEETS, R.color.filter_color_red_dark);
+		filterTypeMap.put(MagicFilterType.SWEETS, R.color.filter_color_red_dark);
+		filterTypeMap.put(MagicFilterType.CALM, R.color.filter_color_brown);
+		filterTypeMap.put(MagicFilterType.LATTE, R.color.filter_color_brown);
+		filterTypeMap.put(MagicFilterType.TENDER, R.color.filter_color_brown);
+
+		if (filterTypeMap.containsKey(filterType)){
+			return filterTypeMap.get(filterType);
+		} else {
+			return R.color.filter_color_grey_light;
 		}
 	}
-	
+
 	public static int FilterType2Thumb(MagicFilterType filterType){
-		switch (filterType) {
-		case NONE:
-			return R.drawable.filter_thumb_original;
-		case WHITECAT:
-			return R.drawable.filter_thumb_whitecat;
-		case BLACKCAT:
-			return R.drawable.filter_thumb_blackcat;
-		case ROMANCE:
-			return R.drawable.filter_thumb_romance;
-		case SAKURA:
-			return R.drawable.filter_thumb_sakura;
-		case AMARO:
-			return R.drawable.filter_thumb_amoro;
-		case BRANNAN:
-			return R.drawable.filter_thumb_brannan;
-		case BROOKLYN:
-			return R.drawable.filter_thumb_brooklyn;
-		case EARLYBIRD:
-			return R.drawable.filter_thumb_earlybird;
-		case FREUD:
-			return R.drawable.filter_thumb_freud;
-		case HEFE:
-			return R.drawable.filter_thumb_hefe;
-		case HUDSON:
-			return R.drawable.filter_thumb_hudson;
-		case INKWELL:
-			return R.drawable.filter_thumb_inkwell;
-		case KEVIN:
-			return R.drawable.filter_thumb_kevin;
-		case LOMO:
-			return R.drawable.filter_thumb_lomo;
-		case N1977:
-			return R.drawable.filter_thumb_1977;
-		case NASHVILLE:
-			return R.drawable.filter_thumb_nashville;
-		case PIXAR:
-			return R.drawable.filter_thumb_piaxr;
-		case RISE:
-			return R.drawable.filter_thumb_rise;
-		case SIERRA:
-			return R.drawable.filter_thumb_sierra;
-		case SUTRO:
-			return R.drawable.filter_thumb_sutro;
-		case TOASTER2:
-			return R.drawable.filter_thumb_toastero;
-		case VALENCIA:
-			return R.drawable.filter_thumb_valencia;
-		case WALDEN:
-			return R.drawable.filter_thumb_walden;
-		case XPROII:
-			return R.drawable.filter_thumb_xpro;
-		case ANTIQUE:
-			return R.drawable.filter_thumb_antique;
-		case SKINWHITEN:
-			return R.drawable.filter_thumb_beauty;
-		case CALM:
-			return R.drawable.filter_thumb_calm;
-		case COOL:
-			return R.drawable.filter_thumb_cool;
-		case EMERALD:
-			return R.drawable.filter_thumb_emerald;
-		case EVERGREEN:
-			return R.drawable.filter_thumb_evergreen;
-		case FAIRYTALE:
-			return R.drawable.filter_thumb_fairytale;
-		case HEALTHY:
-			return R.drawable.filter_thumb_healthy;
-		case NOSTALGIA:
-			return R.drawable.filter_thumb_nostalgia;
-		case TENDER:
-			return R.drawable.filter_thumb_tender;
-		case SWEETS:
-			return R.drawable.filter_thumb_sweets;
-		case LATTE:
-			return R.drawable.filter_thumb_latte;
-		case WARM:
-			return R.drawable.filter_thumb_warm;
-		case SUNRISE:
-			return R.drawable.filter_thumb_sunrise;
-		case SUNSET:
-			return R.drawable.filter_thumb_sunset;
-		case CRAYON:
-			return R.drawable.filter_thumb_crayon;
-		case SKETCH:
-			return R.drawable.filter_thumb_sketch;
-		default:
+		Map<MagicFilterType, Integer> filterTypeMap = new HashMap<>();
+		filterTypeMap.put(MagicFilterType.NONE, R.drawable.filter_thumb_original);
+		filterTypeMap.put(MagicFilterType.WHITECAT, R.drawable.filter_thumb_whitecat);
+		filterTypeMap.put(MagicFilterType.BLACKCAT, R.drawable.filter_thumb_blackcat);
+		filterTypeMap.put(MagicFilterType.ROMANCE, R.drawable.filter_thumb_romance);
+		filterTypeMap.put(MagicFilterType.SAKURA, R.drawable.filter_thumb_sakura);
+		filterTypeMap.put(MagicFilterType.AMARO, R.drawable.filter_thumb_amoro);
+		filterTypeMap.put(MagicFilterType.BRANNAN, R.drawable.filter_thumb_brannan);
+		filterTypeMap.put(MagicFilterType.BROOKLYN, R.drawable.filter_thumb_brooklyn);
+		filterTypeMap.put(MagicFilterType.EARLYBIRD, R.drawable.filter_thumb_earlybird);
+		filterTypeMap.put(MagicFilterType.FREUD, R.drawable.filter_thumb_freud);
+		filterTypeMap.put(MagicFilterType.HEFE, R.drawable.filter_thumb_hefe);
+		filterTypeMap.put(MagicFilterType.HUDSON, R.drawable.filter_thumb_hudson);
+		filterTypeMap.put(MagicFilterType.INKWELL, R.drawable.filter_thumb_inkwell);
+		filterTypeMap.put(MagicFilterType.KEVIN, R.drawable.filter_thumb_kevin);
+		filterTypeMap.put(MagicFilterType.LOMO, R.drawable.filter_thumb_lomo);
+		filterTypeMap.put(MagicFilterType.N1977, R.drawable.filter_thumb_1977);
+		filterTypeMap.put(MagicFilterType.NASHVILLE, R.drawable.filter_thumb_nashville);
+		filterTypeMap.put(MagicFilterType.PIXAR, R.drawable.filter_thumb_piaxr);
+		filterTypeMap.put(MagicFilterType.RISE, R.drawable.filter_thumb_rise);
+		filterTypeMap.put(MagicFilterType.SIERRA, R.drawable.filter_thumb_sierra);
+		filterTypeMap.put(MagicFilterType.SUTRO, R.drawable.filter_thumb_sutro);
+		filterTypeMap.put(MagicFilterType.TOASTER2, R.drawable.filter_thumb_toastero);
+		filterTypeMap.put(MagicFilterType.VALENCIA, R.drawable.filter_thumb_valencia);
+		filterTypeMap.put(MagicFilterType.WALDEN, R.drawable.filter_thumb_walden);
+		filterTypeMap.put(MagicFilterType.XPROII, R.drawable.filter_thumb_xpro);
+		filterTypeMap.put(MagicFilterType.ANTIQUE, R.drawable.filter_thumb_antique);
+		filterTypeMap.put(MagicFilterType.SKINWHITEN, R.drawable.filter_thumb_beauty);
+		filterTypeMap.put(MagicFilterType.CALM, R.drawable.filter_thumb_calm);
+		filterTypeMap.put(MagicFilterType.COOL, R.drawable.filter_thumb_cool);
+		filterTypeMap.put(MagicFilterType.EMERALD, R.drawable.filter_thumb_emerald);
+		filterTypeMap.put(MagicFilterType.EVERGREEN, R.drawable.filter_thumb_evergreen);
+		filterTypeMap.put(MagicFilterType.FAIRYTALE, R.drawable.filter_thumb_fairytale);
+		filterTypeMap.put(MagicFilterType.HEALTHY, R.drawable.filter_thumb_healthy);
+		filterTypeMap.put(MagicFilterType.NOSTALGIA, R.drawable.filter_thumb_nostalgia);
+		filterTypeMap.put(MagicFilterType.TENDER, R.drawable.filter_thumb_tender);
+		filterTypeMap.put(MagicFilterType.SWEETS, R.drawable.filter_thumb_sweets);
+		filterTypeMap.put(MagicFilterType.LATTE, R.drawable.filter_thumb_latte);
+		filterTypeMap.put(MagicFilterType.WARM, R.drawable.filter_thumb_warm);
+		filterTypeMap.put(MagicFilterType.SUNRISE, R.drawable.filter_thumb_sunrise);
+		filterTypeMap.put(MagicFilterType.SUNSET, R.drawable.filter_thumb_sunset);
+		filterTypeMap.put(MagicFilterType.CRAYON, R.drawable.filter_thumb_crayon);
+		filterTypeMap.put(MagicFilterType.SKETCH, R.drawable.filter_thumb_sketch);
+
+		if (filterTypeMap.containsKey(filterType)) {
+			return filterTypeMap.get(filterType);
+		} else {
 			return R.drawable.filter_thumb_original;
 		}
 	}
-	
+
 	public static int FilterType2Name(MagicFilterType filterType){
-		switch (filterType) {
-		case NONE:
-			return R.string.filter_none;
-		case WHITECAT:
-			return R.string.filter_whitecat;
-		case BLACKCAT:
-			return R.string.filter_blackcat;
-		case ROMANCE:
-			return R.string.filter_romance;
-		case SAKURA:
-			return R.string.filter_sakura;
-		case AMARO:
-			return R.string.filter_amaro;
-		case BRANNAN:
-			return R.string.filter_brannan;
-		case BROOKLYN:
-			return R.string.filter_brooklyn;
-		case EARLYBIRD:
-			return R.string.filter_Earlybird;
-		case FREUD:
-			return R.string.filter_freud;
-		case HEFE:
-			return R.string.filter_hefe;
-		case HUDSON:
-			return R.string.filter_hudson;
-		case INKWELL:
-			return R.string.filter_inkwell;
-		case KEVIN:
-			return R.string.filter_kevin;
-		case LOMO:
-			return R.string.filter_lomo;
-		case N1977:
-			return R.string.filter_n1977;
-		case NASHVILLE:
-			return R.string.filter_nashville;
-		case PIXAR:
-			return R.string.filter_pixar;
-		case RISE:
-			return R.string.filter_rise;
-		case SIERRA:
-			return R.string.filter_sierra;
-		case SUTRO:
-			return R.string.filter_sutro;
-		case TOASTER2:
-			return R.string.filter_toastero;
-		case VALENCIA:
-			return R.string.filter_valencia;
-		case WALDEN:
-			return R.string.filter_walden;
-		case XPROII:
-			return R.string.filter_xproii;
-		case ANTIQUE:
-			return R.string.filter_antique;
-		case CALM:
-			return R.string.filter_calm;
-		case COOL:
-			return R.string.filter_cool;
-		case EMERALD:
-			return R.string.filter_emerald;
-		case EVERGREEN:
-			return R.string.filter_evergreen;
-		case FAIRYTALE:
-			return R.string.filter_fairytale;
-		case HEALTHY:
-			return R.string.filter_healthy;
-		case NOSTALGIA:
-			return R.string.filter_nostalgia;
-		case TENDER:
-			return R.string.filter_tender;
-		case SWEETS:
-			return R.string.filter_sweets;
-		case LATTE:
-			return R.string.filter_latte;
-		case WARM:
-			return R.string.filter_warm;
-		case SUNRISE:
-			return R.string.filter_sunrise;
-		case SUNSET:
-			return R.string.filter_sunset;
-		case SKINWHITEN:
-			return R.string.filter_skinwhiten;
-		case CRAYON:
-			return R.string.filter_crayon;
-		case SKETCH:
-			return R.string.filter_sketch;
-		default:
-			return R.string.filter_none;
+		Map<MagicFilterType, Integer> filterTypeMap = new HashMap<>();
+		filterTypeMap.put(MagicFilterType.NONE, R.string.filter_none);
+		filterTypeMap.put(MagicFilterType.WHITECAT, R.string.filter_whitecat);
+		filterTypeMap.put(MagicFilterType.BLACKCAT, R.string.filter_blackcat);
+		filterTypeMap.put(MagicFilterType.ROMANCE, R.string.filter_romance);
+		filterTypeMap.put(MagicFilterType.SAKURA, R.string.filter_sakura);
+		filterTypeMap.put(MagicFilterType.AMARO, R.string.filter_amaro);
+		filterTypeMap.put(MagicFilterType.BRANNAN, R.string.filter_brannan);
+		filterTypeMap.put(MagicFilterType.BROOKLYN, R.string.filter_brooklyn);
+		filterTypeMap.put(MagicFilterType.EARLYBIRD, R.string.filter_Earlybird);
+		filterTypeMap.put(MagicFilterType.FREUD, R.string.filter_freud);
+		filterTypeMap.put(MagicFilterType.HEFE, R.string.filter_hefe);
+		filterTypeMap.put(MagicFilterType.HUDSON, R.string.filter_hudson);
+		filterTypeMap.put(MagicFilterType.INKWELL, R.string.filter_inkwell);
+		filterTypeMap.put(MagicFilterType.KEVIN, R.string.filter_kevin);
+		filterTypeMap.put(MagicFilterType.LOMO, R.string.filter_lomo);
+		filterTypeMap.put(MagicFilterType.N1977, R.string.filter_n1977);
+		filterTypeMap.put(MagicFilterType.NASHVILLE, R.string.filter_nashville);
+		filterTypeMap.put(MagicFilterType.PIXAR, R.string.filter_pixar);
+		filterTypeMap.put(MagicFilterType.RISE, R.string.filter_rise);
+		filterTypeMap.put(MagicFilterType.SIERRA, R.string.filter_sierra);
+		filterTypeMap.put(MagicFilterType.SUTRO, R.string.filter_sutro);
+		filterTypeMap.put(MagicFilterType.TOASTER2, R.string.filter_toastero);
+		filterTypeMap.put(MagicFilterType.VALENCIA, R.string.filter_valencia);
+		filterTypeMap.put(MagicFilterType.WALDEN, R.string.filter_walden);
+		filterTypeMap.put(MagicFilterType.XPROII, R.string.filter_xproii);
+		filterTypeMap.put(MagicFilterType.ANTIQUE, R.string.filter_antique);
+		filterTypeMap.put(MagicFilterType.CALM, R.string.filter_calm);
+		filterTypeMap.put(MagicFilterType.COOL, R.string.filter_cool);
+		filterTypeMap.put(MagicFilterType.EMERALD, R.string.filter_emerald);
+		filterTypeMap.put(MagicFilterType.EVERGREEN, R.string.filter_evergreen);
+		filterTypeMap.put(MagicFilterType.FAIRYTALE, R.string.filter_fairytale);
+		filterTypeMap.put(MagicFilterType.HEALTHY, R.string.filter_healthy);
+		filterTypeMap.put(MagicFilterType.NOSTALGIA, R.string.filter_nostalgia);
+		filterTypeMap.put(MagicFilterType.TENDER, R.string.filter_tender);
+		filterTypeMap.put(MagicFilterType.SWEETS, R.string.filter_sweets);
+		filterTypeMap.put(MagicFilterType.LATTE, R.string.filter_latte);
+		filterTypeMap.put(MagicFilterType.WARM, R.string.filter_warm);
+		filterTypeMap.put(MagicFilterType.SUNRISE, R.string.filter_sunrise);
+		filterTypeMap.put(MagicFilterType.SUNSET, R.string.filter_sunset);
+		filterTypeMap.put(MagicFilterType.SKINWHITEN, R.string.filter_skinwhiten);
+		filterTypeMap.put(MagicFilterType.CRAYON, R.string.filter_crayon);
+		filterTypeMap.put(MagicFilterType.SKETCH, R.string.filter_sketch);
+
+		if (filterTypeMap.containsKey(filterType)) {
+			return filterTypeMap.get(filterType);
+		} else {
+			return R.drawable.filter_thumb_original;
 		}
 	}
 }

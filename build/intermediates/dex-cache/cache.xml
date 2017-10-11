@@ -3,6 +3,15 @@
 
     <item
         is-multidex="false"
+        jar="/home/pier/Documenti/AndroidStudioProjects/MagicCameraAndroidTest/magicfilter/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="022660abb77d1e466a86dedd389de1b004d1c041">
+        <dex dex="/home/pier/Documenti/AndroidStudioProjects/MagicCameraAndroidTest/app/build/intermediates/pre-dexed/debug/classes_f2d43ee8c49c58f74a9b07ec8cc3d5aa6edae800.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/home/pier/Scaricati/MagicCamera-master/Project-AndroidStudio/magicfilter/build/intermediates/bundles/default/classes.jar"
         jumboMode="false"
         optimize="true"
