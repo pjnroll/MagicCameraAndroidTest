@@ -1,7 +1,7 @@
 package com.seu.magicfilter;
 
 import com.seu.magicfilter.camera.CameraEngine;
-import com.seu.magicfilter.exceptions.MagicEngineError;
+import com.seu.magicfilter.exceptions.MagicEngineException;
 import com.seu.magicfilter.filter.helper.MagicFilterType;
 import com.seu.magicfilter.utils.MagicParams;
 import com.seu.magicfilter.helper.SavePictureTask;
@@ -18,7 +18,7 @@ public class MagicEngine {
 
     public static MagicEngine getInstance(){
         if(magicEngine == null)
-            throw new MagicEngineError();
+            throw new MagicEngineException();
         else
             return magicEngine;
     }

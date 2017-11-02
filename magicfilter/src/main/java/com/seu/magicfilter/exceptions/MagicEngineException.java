@@ -4,12 +4,12 @@ package com.seu.magicfilter.exceptions;
  * Created by pier on 11/10/17.
  */
 
-public class MagicEngineError extends Error {
-    public MagicEngineError() {
+public class MagicEngineException extends Exception {
+    public MagicEngineException() {
         this("MagicEngine must be built first");
     }
 
-    private MagicEngineError(String s) {
+    private MagicEngineException(String s) {
         super(s);
     }
 }
