@@ -4,7 +4,7 @@ package com.seu.magicfilter.exceptions;
  * Created by pier on 11/10/17.
  */
 
-public class MagicEngineException extends Exception {
+public class MagicEngineException extends RuntimeException {
     public MagicEngineException() {
         this("MagicEngine must be built first");
     }

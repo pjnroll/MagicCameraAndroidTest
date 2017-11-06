@@ -73,7 +73,7 @@ public final class EglCore {
      * @param sharedContext The context to share, or null if sharing is not desired.
      * @param flags Configuration bit flags, e.g. FLAG_RECORDABLE.
      */
-    public EglCore(EGLContext sharedContext, int flags) {
+    public EglCore(EGLContext sharedContext, int flags) throws EglCoreException {
         if (mEGLDisplay != EGL14.EGL_NO_DISPLAY) {
             throw new EglCoreException("EGL already set up");
         }
@@ -228,7 +228,7 @@ public final class EglCore {
      * <p>
      * If this is destined for MediaCodec, the EGLConfig should have the "recordable" attribute.
      */
-    public EGLSurface createWindowSurface(Object surface) {
+    public EGLSurface createWindowSurface(Object surface) throws EglCoreException {
         if (!(surface instanceof Surface) && !(surface instanceof SurfaceTexture)) {
             throw new EglCoreException("invalid surface: " + surface);
         }
@@ -249,7 +249,7 @@ public final class EglCore {
     /**
      * Creates an EGL surface associated with an offscreen buffer.
      */
-    public EGLSurface createOffscreenSurface(int width, int height) {
+    public EGLSurface createOffscreenSurface(int width, int height) throws EglCoreException {
         int[] surfaceAttribs = {
                 EGL14.EGL_WIDTH, width,
                 EGL14.EGL_HEIGHT, height,
@@ -267,7 +267,7 @@ public final class EglCore {
     /**
      * Makes our EGL context current, using the supplied surface for both "draw" and "read".
      */
-    public void makeCurrent(EGLSurface eglSurface) {
+    public void makeCurrent(EGLSurface eglSurface) throws EglCoreException {
         if (mEGLDisplay == EGL14.EGL_NO_DISPLAY) {
             // called makeCurrent() before create?
             Log.d(TAG, "NOTE: makeCurrent w/o display");
@@ -280,7 +280,7 @@ public final class EglCore {
     /**
      * Makes our EGL context current, using the supplied "draw" and "read" surfaces.
      */
-    public void makeCurrent(EGLSurface drawSurface, EGLSurface readSurface) {
+    public void makeCurrent(EGLSurface drawSurface, EGLSurface readSurface) throws EglCoreException {
         if (mEGLDisplay == EGL14.EGL_NO_DISPLAY) {
             // called makeCurrent() before create?
             Log.d(TAG, "NOTE: makeCurrent w/o display");
@@ -293,7 +293,7 @@ public final class EglCore {
     /**
      * Makes no context current.
      */
-    public void makeNothingCurrent() {
+    public void makeNothingCurrent() throws EglCoreException {
         if (!EGL14.eglMakeCurrent(mEGLDisplay, EGL14.EGL_NO_SURFACE, EGL14.EGL_NO_SURFACE,
                 EGL14.EGL_NO_CONTEXT)) {
             throw new EglCoreException("eglMakeCurrent failed");
@@ -365,7 +365,7 @@ public final class EglCore {
     /**
      * Checks for EGL errors.  Throws an exception if an error has been raised.
      */
-    private void checkEglError(String msg) {
+    private void checkEglError(String msg) throws EglCoreException {
         int error;
         if ((error = EGL14.eglGetError()) != EGL14.EGL_SUCCESS) {
             throw new EglCoreException(msg + ": EGL error: 0x" + Integer.toHexString(error));

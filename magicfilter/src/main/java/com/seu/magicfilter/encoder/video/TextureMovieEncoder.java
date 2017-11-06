@@ -29,7 +29,9 @@ import android.os.Message;
 import android.util.Log;
 
 import com.seu.magicfilter.camera.utils.CameraInfo;
+import com.seu.magicfilter.exceptions.EglCoreException;
 import com.seu.magicfilter.exceptions.TextureMovieEncoderException;
+import com.seu.magicfilter.exceptions.WindowSurfaceException;
 import com.seu.magicfilter.filter.base.MagicCameraInputFilter;
 import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 import com.seu.magicfilter.filter.helper.MagicFilterFactory;
@@ -287,7 +289,11 @@ public class TextureMovieEncoder implements Runnable {
 
             switch (what) {
                 case MSG_START_RECORDING:
-                    encoder.handleStartRecording((EncoderConfig) obj);
+                    try {
+                        encoder.handleStartRecording((EncoderConfig) obj);
+                    } catch (TextureMovieEncoderException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case MSG_STOP_RECORDING:
                     encoder.handleStopRecording();
@@ -301,13 +307,21 @@ public class TextureMovieEncoder implements Runnable {
                     encoder.handleSetTexture(inputMessage.arg1);
                     break;
                 case MSG_UPDATE_SHARED_CONTEXT:
-                    encoder.handleUpdateSharedContext((EGLContext) inputMessage.obj);
+                    try {
+                        encoder.handleUpdateSharedContext((EGLContext) inputMessage.obj);
+                    } catch (EglCoreException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case MSG_QUIT:
                     Looper.myLooper().quit();
                     break;
                 default:
-                    throw new TextureMovieEncoderException("Unhandled msg what=" + what);
+                    try {
+                        throw new TextureMovieEncoderException("Unhandled msg what=" + what);
+                    } catch (TextureMovieEncoderException e) {
+                        e.printStackTrace();
+                    }
             }
         }
     }
@@ -315,7 +329,7 @@ public class TextureMovieEncoder implements Runnable {
     /**
      * Starts recording.
      */
-    private void handleStartRecording(EncoderConfig config) {
+    private void handleStartRecording(EncoderConfig config) throws TextureMovieEncoderException {
         Log.d(TAG, "handleStartRecording " + config);
         prepareEncoder(config.mEglContext, config.mWidth, config.mHeight, config.mBitRate,
                 config.mOutputFile);
@@ -368,7 +382,7 @@ public class TextureMovieEncoder implements Runnable {
      * This is useful if the old context we were sharing with went away (maybe a GLSurfaceView
      * that got torn down) and we need to hook up with the new one.
      */
-    private void handleUpdateSharedContext(EGLContext newSharedContext) {
+    private void handleUpdateSharedContext(EGLContext newSharedContext) throws EglCoreException {
         Log.d(TAG, "handleUpdatedSharedContext " + newSharedContext);
 
         // Release the EGLSurface and EGLContext.
@@ -378,7 +392,11 @@ public class TextureMovieEncoder implements Runnable {
 
         // Create a new EGLContext and recreate the window surface.
         mEglCore = new EglCore(newSharedContext, EglCore.FLAG_RECORDABLE);
-        mInputWindowSurface.recreate(mEglCore);
+        try {
+            mInputWindowSurface.recreate(mEglCore);
+        } catch (WindowSurfaceException e) {
+            e.printStackTrace();
+        }
         mInputWindowSurface.makeCurrent();
 
         // Create new programs and such for the new context.
@@ -393,7 +411,7 @@ public class TextureMovieEncoder implements Runnable {
     }
 
     private void prepareEncoder(EGLContext sharedContext, int width, int height, int bitRate,
-            File outputFile) {
+            File outputFile) throws TextureMovieEncoderException {
         try {
             mVideoEncoder = new VideoEncoderCore(width, height, bitRate, outputFile);
         } catch (IOException ioe) {
@@ -401,7 +419,11 @@ public class TextureMovieEncoder implements Runnable {
         }
         mVideoWidth = width;
         mVideoHeight = height;
-        mEglCore = new EglCore(sharedContext, EglCore.FLAG_RECORDABLE);
+        try {
+            mEglCore = new EglCore(sharedContext, EglCore.FLAG_RECORDABLE);
+        } catch (EglCoreException e) {
+            e.printStackTrace();
+        }
         mInputWindowSurface = new WindowSurface(mEglCore, mVideoEncoder.getInputSurface(), true);
         mInputWindowSurface.makeCurrent();
 

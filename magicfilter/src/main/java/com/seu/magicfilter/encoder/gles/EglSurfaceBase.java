@@ -158,7 +158,7 @@ public class EglSurfaceBase {
      * <p>
      * Expects that this object's EGL surface is current.
      */
-    public void saveFrame(File file) throws IOException {
+    public void saveFrame(File file) throws IOException, EglSurfaceBaseException {
         if (!mEglCore.isCurrent(mEGLSurface)) {
             throw new EglSurfaceBaseException("Expected EGL context/surface is not current");
         }

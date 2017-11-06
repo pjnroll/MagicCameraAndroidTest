@@ -84,7 +84,7 @@ public class WindowSurface extends EglSurfaceBase {
      * context somewhere, the create call will fail with complaints from the Surface
      * about already being connected.
      */
-    public void recreate(EglCore newEglCore) {
+    public void recreate(EglCore newEglCore) throws WindowSurfaceException {
         if (mSurface == null) {
             throw new WindowSurfaceException("not yet implemented for SurfaceTexture");
         }
